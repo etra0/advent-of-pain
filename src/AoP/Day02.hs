@@ -26,24 +26,25 @@ parse_throw s =
     "Z" -> Scissor
     _   -> error "bad input"
 
-parse_match :: [String] -> [Throw]
-parse_match = map parse_throw
+parse_match :: [String] -> (Throw, Throw)
+parse_match [a, b] = (parse_throw a, parse_throw b)
 
-resolve_match :: [Throw] -> Round
+parse_match _ = error "Wrong input"
+
+resolve_match :: (Throw, Throw) -> Round
 resolve_match throw = 
   let outcome = case throw of
-       [Rock,      Paper]      -> Player
-       [Rock,      Scissor]    -> Enemy
-       [Rock,      Rock]       -> Tie
-       [Paper,     Paper]     -> Tie
-       [Paper,     Scissor]   -> Player
-       [Paper,     Rock]      -> Enemy
-       [Scissor,   Paper]   -> Enemy
-       [Scissor,   Scissor] -> Tie
-       [Scissor,   Rock]    -> Player
-       _ -> error "bad input"
+       (Rock,      Paper)     -> Player
+       (Rock,      Scissor)   -> Enemy
+       (Rock,      Rock)      -> Tie
+       (Paper,     Paper)     -> Tie
+       (Paper,     Scissor)   -> Player
+       (Paper,     Rock)      -> Enemy
+       (Scissor,   Paper)     -> Enemy
+       (Scissor,   Scissor)   -> Tie
+       (Scissor,   Rock)      -> Player
   in
-       (outcome, last throw)
+       (outcome, snd throw)
 
 calculate_score :: Round -> Int
 calculate_score (outcome, throw) = 
@@ -57,7 +58,7 @@ calculate_score (outcome, throw) =
         Tie    -> 3
         Enemy  -> 0
 
-parse_all_matches :: String -> [[Throw]]
+parse_all_matches :: String -> [(Throw, Throw)]
 parse_all_matches s = map parse_match $ map words $ lines s
 
 solve1 :: String -> Int
