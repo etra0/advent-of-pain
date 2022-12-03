@@ -32,8 +32,10 @@ library
         AoP
            AoP.Day01 
            AoP.Day02 
+           AoP.Day03 
     build-depends:
             base
+            , containers
 
 executable solver
     main-is:          Main.hs
@@ -44,7 +46,7 @@ executable solver
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
     build-depends:    
-            base ^>=4.15.1.0
+            base >=4.15.1.0
         ,   advent-of-pain
         ,   optparse-applicative
     hs-source-dirs:   app
