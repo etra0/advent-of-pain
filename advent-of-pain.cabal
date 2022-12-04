@@ -33,6 +33,7 @@ library
            AoP.Day01 
            AoP.Day02 
            AoP.Day03 
+           AoP.Day04 
     build-depends:
             base
             , containers
