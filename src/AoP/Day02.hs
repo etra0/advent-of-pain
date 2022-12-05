@@ -51,13 +51,13 @@ calculate_score (outcome, throw) =
         Scissor  -> 3
   in
     throw_score + case outcome of
-        Win -> 6
-        Tie    -> 3
-        Loss  -> 0
+        Win  -> 6
+        Tie  -> 3
+        Loss -> 0
 
 solve1 :: String -> Int
 solve1 s =
-  let all_matches = map parse_match $ map words $ lines s
+  let all_matches = map (parse_match . words) $ lines s
   in
     foldr (\ x y -> (calculate_score $ is_winner x) + y ) 0 all_matches
   
@@ -92,7 +92,7 @@ resolve_match2 (enemy_throw, outcome) =
     
 solve2 :: String -> Int
 solve2 s =
-  let all_matches = map calculate_score $ map resolve_match2 $ map parse_match2 $ map words $ lines s
+  let all_matches = map (calculate_score . resolve_match2 . parse_match2 . words) (lines s)
   in
     foldr (+) 0 all_matches
 
