@@ -7,6 +7,7 @@ import qualified AoP.Day02 as Day02
 import qualified AoP.Day03 as Day03
 import qualified AoP.Day04 as Day04
 import qualified AoP.Day05 as Day05
+import qualified AoP.Day06 as Day06
 
 main :: IO ()
 main = do
@@ -19,6 +20,7 @@ main = do
       3 -> Day03.solve_all
       4 -> Day04.solve_all
       5 -> Day05.solve_all
+      6 -> Day06.solve_all
       _ -> putStrLn "Unknown day"
       where day = read input
     _       -> putStrLn "Incorrect input"
